@@ -1,0 +1,14 @@
+zerops:
+  - setup: zerops
+    build:
+      base: alpine@latest
+      deployFiles: start.sh
+    run:
+      ports:
+        - port: 20443
+          protocol: UDP
+      prepareCommands:
+        - sudo apk add --no-cache openssl curl
+        - sudo curl -L -o /usr/local/bin/hysteria https://download.hysteria.network/app/latest/hysteria-linux-amd64
+        - sudo chmod +x /usr/local/bin/hysteria
+      start: sh start.sh
